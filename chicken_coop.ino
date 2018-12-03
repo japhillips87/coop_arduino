@@ -8,7 +8,7 @@ const int nightLightLevel = 40;
 const int dayLightLevel = 80;
 const int debounceDelay = 50;
 const long loopDelay = (1000*60*10);
-const long doorTimeout = 40000;
+const long doorTimeout = 120000;
 
 int reedShutState;
 int reedOpenState;
@@ -30,7 +30,7 @@ void loop() {
   if (somethingIsWrong) {
     return;
   }
-  
+
   int lightLevel = getLightLevel();
 
   processLight(lightLevel);
@@ -54,7 +54,7 @@ void processLight(int lightLevel) {
 void shutDoor() {
   setDoorToShutDirection();
   long shuttingTime = millis();
-  
+
   while (!doorIsShut()) {
     if (millis() - shuttingTime > doorTimeout) {
       somethingIsWrong = true;
@@ -68,7 +68,7 @@ void shutDoor() {
 void openDoor() {
   setDoorToOpenDirection();
   long openingTime = millis();
-  
+
   while (!doorIsOpen()) {
     if (millis() - openingTime > doorTimeout) {
       somethingIsWrong = true;
